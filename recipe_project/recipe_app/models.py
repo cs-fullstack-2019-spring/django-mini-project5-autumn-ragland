@@ -18,6 +18,8 @@ class RecipeModel(models.Model):
     image = models.CharField(max_length=1000, default='')
     name = models.CharField(max_length=500, default='')
     description = models.TextField(default='')
+    ingredients = models.TextField(default='')
+    directions = models.TextField(default='')
     date_create = models.DateField(default=date.today)
     creator = models.ForeignKey(UserModel, on_delete=models.CASCADE, blank=True, null=True)
 

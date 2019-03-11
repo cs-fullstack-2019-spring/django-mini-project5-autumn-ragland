@@ -1,3 +1,25 @@
 body{
     margin: 5%;
 }
+
+/*resize card*/
+.card{
+    margin: 5%;
+    width: 75%;
+    height: auto;
+}
+/*resize card img*/
+.card-img-top{
+    width: 100%;
+    height: auto;
+}
+
+/*size/style grid*/
+.gridContainer{
+    margin: 5%;
+    width: 90%;
+    display: grid;
+    grid-gap: 1%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows:minmax(50px, auto);
+}

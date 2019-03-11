@@ -2,11 +2,20 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated %}
+<div gridContainer>
     {% if my_recipes %}
         {% for eachRecipe in my_recipes %}
-        {{ eachRecipe.name }}
+            <div class="card">
+                <img class="card-img-top" src="{{ eachRecipe.image }}" alt="recipe card">
+                <div class="card-body">
+                    <a class="card-title" href="{% url 'recipe_details' eachRecipe.id %}">{{ eachRecipe.name }}</a>
+                    <p class="card-text" >{{ eachRecipe.description }}<br>{{ eachRecipe.date_create }}<br>{{ eachRecipe.creator }}</p>
+                    <a href="{% url 'edit_recipe' eachRecipe.id %}">Edit</a>
+                </div>
+            </div>
         {% endfor %}
+</div>
     {% else %}
         <p>You have no recipes</p>
     {% endif %}

@@ -1,0 +1,16 @@
+{% extends 'recipe_app/base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <img class="card-img-top" src="{{ recipe.image }}" alt="recipe card">
+    <div class="card-body">
+        <h5 class="card-title">{{ recipe.name }}</h5>
+        <p class="card-text">{{ recipe.description }}<br>{{ recipe.date_create }}<br>{{ recipe.creator }}<br>{{
+            recipe.ingredients }}<br>{{ recipe.directions }}</p>
+    </div>
+</div>
+
+<a href="{% url 'all_recipes' %}">Back to All</a>
+
+{% endblock %}
