@@ -1,10 +1,13 @@
 {% extends 'recipe_app/base.html' %}
 
 {% block content %}
+
 <section class="nav justify-content-center">
     <a class="nav-link" href="{% url 'all_recipes' %}">Back to All</a>
 </section>
+
 <h2>{{ recipe.name }} Recipe Details</h2>
+
 <div class="card" id="details">
     <img class="card-img-top" src="{{ recipe.image }}" alt="recipe card">
     <div class="card-body">
@@ -16,6 +19,5 @@
         <p class="card-text"><strong>Directions: </strong>{{ recipe.directions }}</p>
     </div>
 </div>
-
 
 {% endblock %}

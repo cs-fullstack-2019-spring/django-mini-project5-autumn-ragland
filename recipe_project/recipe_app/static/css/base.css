@@ -1,6 +1,9 @@
+/*add margin and background to body on all pages*/
 body{
     margin: 5%;
+    background: #e0e0e0;
 }
+/*align headers on the page*/
 h2, h1{
     text-align: center;
 }
@@ -15,7 +18,6 @@ h2, h1{
     width: 100%;
     height: auto;
 }
-
 /*size/style grid*/
 .gridContainer{
     margin: 5%;
@@ -25,18 +27,14 @@ h2, h1{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows:minmax(50px, auto);
 }
-
+/*resize profile page card*/
 #profile{
     width: 20%;
     height: auto;
 }
-
+/*resize details page card*/
 #details{
     margin: 0 30% 0 25%;
     width: 50%;
     height: auto;
-}
-
-body{
-    background: #e0e0e0;
 }

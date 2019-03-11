@@ -10,6 +10,8 @@ urlpatterns = [
     path('all_recipes/', views.all_recipes, name='all_recipes'),
     # edit user recipes
     path('edit_recipe/<int:ID>', views.edit_recipe, name='edit_recipe'),
+    # delete user recipes
+    path('delete_recipe/<int:ID>', views.delete_recipe, name='delete_recipe'),
     # create a new recipe
     path('new_recipe/', views.new_recipe, name='new_recipe'),
     # details of recipes

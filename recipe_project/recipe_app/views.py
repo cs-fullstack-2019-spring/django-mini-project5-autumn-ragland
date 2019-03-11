@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import UserModel, UserForm, RecipeModel, RecipeForm
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 
@@ -109,6 +108,22 @@ def edit_recipe(request, ID):
         return redirect('home')
 
     return render(request, 'recipe_app/new_recipe.html', context)
+
+
+# delete recipe
+def delete_recipe(request, ID):
+    # get recipe
+    recipe_item = get_object_or_404(RecipeModel, pk=ID)
+
+    if request.method == 'POST':
+        # delete recipe
+        recipe_item.delete()
+        return redirect('index')
+    context = {
+        'recipe_item': recipe_item
+    }
+    # render confirmation page
+    return render(request, 'recipe_app/delete_confirmation.html', context)
 
 
 # create a new recipe

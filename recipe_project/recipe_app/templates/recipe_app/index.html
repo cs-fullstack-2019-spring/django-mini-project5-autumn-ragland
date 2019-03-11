@@ -3,38 +3,41 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-<h2>{{ request.user }}'s Recipes</h2>
 
-<section class="nav justify-content-center">
-<a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-</section>
+    <h2>{{ request.user }}'s Recipes</h2>
 
-<div class="gridContainer">
-    {% if my_recipes %}
-    {% for eachRecipe in my_recipes %}
-    <div class="card">
-        <img class="card-img-top" src="{{ eachRecipe.image }}" alt="recipe card">
-        <div class="card-body">
-            <a class="card-title" href="{% url 'recipe_details' eachRecipe.id %}">{{ eachRecipe.name }}</a>
-            <p class="card-text"><strong>Description</strong>: {{ eachRecipe.description }}<br><strong>Date
-                Created</strong>: {{ eachRecipe.date_create }}<br><strong>Creator</strong>: {{ eachRecipe.creator }}</p>
-            <a href="{% url 'edit_recipe' eachRecipe.id %}">Edit</a>
+    <section class="nav justify-content-center">
+    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+    </section>
+
+    <div class="gridContainer">
+        {% if my_recipes %}
+        {% for eachRecipe in my_recipes %}
+        <div class="card">
+            <img class="card-img-top" src="{{ eachRecipe.image }}" alt="recipe card">
+            <div class="card-body">
+                <a class="card-title" href="{% url 'recipe_details' eachRecipe.id %}">{{ eachRecipe.name }}</a>
+                <p class="card-text"><strong>Description</strong>: {{ eachRecipe.description }}<br><strong>Date
+                    Created</strong>: {{ eachRecipe.date_create }}<br><strong>Creator</strong>: {{ eachRecipe.creator }}</p>
+                <a href="{% url 'edit_recipe' eachRecipe.id %}">Edit</a>
+                <a href="{% url 'delete_recipe' eachRecipe.id %}">Delete</a>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% else %}
-<p>You have no recipes</p>
-{% endif %}
+
+        {% else %}
+        <p>You have no recipes</p>
+        {% endif %}
 
 
 {% else %}
-<h1>Welcome to the Recipe Site</h1>
-<section class="nav justify-content-center">
-    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-    <a class="nav-link" href="{% url 'new_user' %}">Create a New User</a>
-</section>
+    <h1>Welcome to the Recipe Site</h1>
 
+    <section class="nav justify-content-center">
+        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        <a class="nav-link" href="{% url 'new_user' %}">Create a New User</a>
+    </section>
 
 {% endif %}
 
