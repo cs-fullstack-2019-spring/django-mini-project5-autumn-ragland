@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import UserModel, UserForm, RecipeModel, RecipeForm
+from .forms import UserModel, UserForm, EditUserForm, RecipeModel, RecipeForm
 from django.contrib.auth.models import User
 
 
@@ -40,7 +40,7 @@ def edit_user(request, ID):
     # grab user by id
     user_item = get_object_or_404(UserModel, pk=ID)
     # populate user form
-    user_form = UserForm(request.POST or None, instance=user_item)
+    user_form = EditUserForm(request.POST or None, instance=user_item)
     context = {
         # pass populated form
         'form': user_form
@@ -48,8 +48,14 @@ def edit_user(request, ID):
     if request.method == 'POST':
         # save form
         user_form.save()
+
+        # update user info in django user table
+        current_user = User.objects.get(username=request.user)
+        current_user.username = request.POST['name']
+        current_user.save()
+        # redirect to profile page on submit
         return redirect('profile')
-    return render(request, 'recipe_app/new_user.html', context)
+    return render(request, 'recipe_app/edit_user.html', context)
 
 
 # view profile info
