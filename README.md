@@ -34,3 +34,6 @@ The profile page should allow you to edit the logged in users:
 
 ## Challenge
 Include a delete button
+
+##Note
+I created three test users (MargretHouse, JaneDoe, and JohnSmith) with the same password (test4321) and a few recipies for each.
