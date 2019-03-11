@@ -1,0 +1,22 @@
+{% extends 'recipe_app/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if my_recipes %}
+        {% for eachRecipe in my_recipes %}
+        {{ eachRecipe.name }}
+        {% endfor %}
+    {% else %}
+        <p>You have no recipes</p>
+    {% endif %}
+<a href="{% url 'logout' %}">Log Out</a>
+
+{% else %}
+
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'new_user' %}">Create a New User</a>
+
+{% endif %}
+
+{% endblock %}

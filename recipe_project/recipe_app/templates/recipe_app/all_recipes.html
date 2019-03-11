@@ -1,0 +1,13 @@
+{% extends 'recipe_app/base.html' %}
+
+{% block content %}
+
+{% if recipes %}
+    {% for eachRecipe in recipes %}
+    {{ eachRecipe.name }}
+    {% endfor %}
+{% else %}
+<p>There are no recipes</p>
+{% endif %}
+
+{% endblock %}
