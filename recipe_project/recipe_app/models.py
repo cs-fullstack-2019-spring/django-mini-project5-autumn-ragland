@@ -8,6 +8,7 @@ class UserModel(models.Model):
     name = models.CharField(max_length=500, default='')
     password = models.CharField(max_length=500, default='')
     email = models.EmailField(default='')
+    image = models.CharField(max_length=1000, default='')
     fk_to_User = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):

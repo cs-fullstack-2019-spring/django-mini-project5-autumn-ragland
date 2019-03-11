@@ -3,17 +3,19 @@
 {% block content %}
 
 {% if recipes %}
-<div gridContainer>
+<h2>All Recipes</h2>
+<div class="gridContainer">
     {% for eachRecipe in recipes %}
 
-        <div class="card">
-            <img class="card-img-top" src="{{ eachRecipe.image }}" alt="recipe card">
-            <div class="card-body">
-                <a class="card-title" href="{% url 'recipe_details' eachRecipe.id %}">{{ eachRecipe.name }}</a>
-                <p class="card-text" >{{ eachRecipe.description }}<br>{{ eachRecipe.date_create }}<br>{{ eachRecipe.creator }}</p>
-                <a href="{% url 'edit_recipe' eachRecipe.id %}">Edit</a>
-            </div>
+    <div class="card">
+        <img class="card-img-top" src="{{ eachRecipe.image }}" alt="recipe card">
+        <div class="card-body">
+            <a class="card-title" href="{% url 'recipe_details' eachRecipe.id %}">{{ eachRecipe.name }}</a>
+            <p class="card-text"><strong>Description</strong>: {{ eachRecipe.description }}<br><strong>Date
+                Created</strong>: {{ eachRecipe.date_create }}<br><strong>Creator</strong>:
+                {{ eachRecipe.creator }}</p>
         </div>
+    </div>
     {% endfor %}
 </div>
 {% else %}

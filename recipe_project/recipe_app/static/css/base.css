@@ -1,7 +1,9 @@
 body{
     margin: 5%;
 }
-
+h2, h1{
+    text-align: center;
+}
 /*resize card*/
 .card{
     margin: 5%;
@@ -22,4 +24,19 @@ body{
     grid-gap: 1%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows:minmax(50px, auto);
+}
+
+#profile{
+    width: 20%;
+    height: auto;
+}
+
+#details{
+    margin: 0 30% 0 25%;
+    width: 50%;
+    height: auto;
+}
+
+body{
+    background: #e0e0e0;
 }

@@ -15,7 +15,7 @@ urlpatterns = [
     # details of recipes
     path('recipe_details/<int:ID>', views.recipe_details, name='recipe_details'),
     # view user profile
-    # path('profile/', views.profile, name='profile'),
+    path('profile/', views.profile, name='profile'),
     # edit user profile information
-    path('edit_user/', views.edit_user, name='edit_user'),
+    path('edit_user/<int:ID>', views.edit_user, name='edit_user'),
 ]

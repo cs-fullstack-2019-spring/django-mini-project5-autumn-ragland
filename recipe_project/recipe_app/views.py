@@ -24,29 +24,48 @@ def index(request):
 def new_user(request):
     form = UserForm(request.POST or None)
     if request.method == 'POST':
-        # save to django user table
+        # save to django user table on submit
         User.objects.create_user(request.POST["name"], "", request.POST["password"])
         # save form
         form.save()
         return redirect('home')
     context = {
+        # pass empty form
         'form': form
     }
     return render(request, 'recipe_app/new_user.html', context)
 
 
-# edit user info BROKEN
-def edit_user(request):
-    # user_item = get_object_or_404(UserModel, pk=request.user)
-    # user_form = UserForm(request.POST or None, instance=user_item)
-    # context = {
-    #     'form': user_form
-    # }
-    # if request.method == 'POST':
-    #     user_form.save()
-    #     return redirect('home')
-    # return render(request, 'recipe_app/new_user.html', context)
-    return HttpResponse('not working')
+# edit user info
+def edit_user(request, ID):
+    # grab user by id
+    user_item = get_object_or_404(UserModel, pk=ID)
+    # populate user form
+    user_form = UserForm(request.POST or None, instance=user_item)
+    context = {
+        # pass populated form
+        'form': user_form
+    }
+    if request.method == 'POST':
+        # save form
+        user_form.save()
+        return redirect('profile')
+    return render(request, 'recipe_app/new_user.html', context)
+
+
+# view profile info
+def profile(request):
+    if request.user.is_authenticated:
+        # grab logged in user
+        current_user = UserModel.objects.get(name=request.user)
+        user = UserModel.objects.get(name=current_user)
+    else:
+        user = ''
+    context = {
+        # pass user info to page
+        'user': user
+    }
+    return render(request, 'recipe_app/profile.html', context)
 
 
 # all recipes created by all users
@@ -65,7 +84,7 @@ def recipe_details(request, ID):
     # get recipe by id
     recipe_item = get_object_or_404(RecipeModel, pk=ID)
 
-    # render recipe info
+    # pass recipe info
     context = {
         'recipe': recipe_item
     }
@@ -79,7 +98,7 @@ def edit_recipe(request, ID):
     recipe_item = get_object_or_404(RecipeModel, pk=ID)
     recipe_form = RecipeForm(request.POST or None, instance=recipe_item)
 
-    # render populated form
+    # pass populated form
     context = {
         'form': recipe_form
     }
@@ -104,7 +123,7 @@ def new_recipe(request):
         # add recipe to model with fk of logged in user
         RecipeModel.objects.create(name=request.POST['name'], image=request.POST['image'],
                                    description=request.POST['description'],
-                                   date_create=request.POST['date_create'],
-                                   creator=current_user)
+                                   date_create=request.POST['date_create'], directions=request.POST['directions'],
+                                   ingredients=request.POST['ingredients'], creator=current_user)
         return redirect('home')
     return render(request, 'recipe_app/new_recipe.html', context)

@@ -1,5 +1,23 @@
 {% extends 'recipe_app/base.html' %}
 
 {% block content %}
-<a href="{% url 'edit_user' %}">Edit</a>
+{% if request.user.is_authenticated %}
+
+    <h2>{{ request.user }}'s Profile</h2>
+    <div class="card" id="profile">
+        <img class="card-img-top" src="{{ user.image }}" alt="profile pic">
+        <div class="card-body">
+            <h5 class="card-title">{{ user.name }}</h5>
+            <p class="card-text"><strong>Email: </strong>{{ user.email }}</p>
+            <a href="{% url 'edit_user' user.id %}">Edit</a>
+        </div>
+    </div>
+
+
+
+
+{% else %}
+<h2>Please <a href="{% url 'home' %}">Log In</a> to Access Your Profile</h2>
+{% endif %}
+
 {% endblock %}

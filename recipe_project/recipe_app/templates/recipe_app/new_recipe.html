@@ -1,10 +1,15 @@
 {% extends 'recipe_app/base.html' %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button>Submit</button>
-</form>
-<a href="{% url 'home' %}">Back</a>
+{% if request.user.is_authenticated %}
+    <h2>New Recipe</h2>
+    <form class="form-group" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Submit</button>
+    </form>
+    <a href="{% url 'home' %}">Back</a>
+{% else %}
+<h2>Please <a href="{% url 'home' %}">Log In</a> to Add a Recipe</h2>
+{% endif %}
 {% endblock %}
